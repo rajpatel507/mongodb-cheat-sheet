@@ -7,6 +7,12 @@ All mongoDB commands in compact formate.
 - [mongo Shell](#mongo-shell)
 - [insert Document](#insert-document)
 - [Query Documents](query-documents)
+- [BSON Types](bson-types)
+- [Updating Documents](updating-documents)
+- [Field Update Operators](field-update-operators)
+- [Removing Documents](removing-documents)
+- [Indexes](indexing)
+
 
 
 ## mongo shell
@@ -75,5 +81,43 @@ All mongoDB commands in compact formate.
     
 
 2.  `db.collection.findOne(query, projection)` -  Returns one document that satisfies the specified query criteria. If multiple             documents satisfy the query, this method returns the first documen.
+
+## BSON Types
+
+|Type         | Value | 
+|-------------|-------|
+| String      |   2   |
+| Array       |   4   |
+| Binary Data |   5   |
+| Date        |   9   | 
         
+
+## Updating Documents
+
+1. `db.collection.updateOne()` - Updates at most a single document that match a specified filter even though multiple documents may         match the specified filter.
+
+2. `db.collection.updateMany()` - Update all documents that match a specified filter.
+
+3. `db.collection.replaceOne()` - Replaces at most a single document that match a specified filter even though multiple documents may       match the specified filter.
+
+4. `db.collection.update()` - Either updates or replaces a single document that match a specified filter or updates all documents that       match a specified filter.
+
+5. `upsert : true` option for Update - no documents match the specified filter, then the operation creates a new document and inserts       it. If there are matching documents, then the operation modifies or replaces the matching document or documents.
+
+## Field Update Operators
+
+| Operator      | Description                                                                                                          |
+|---------------|----------------------------------------------------------------------------------------------------------------------|
+| $inc	        | Increments the value of the field by the specified amount.                                                           |
+| $mul	        | Multiplies the value of the field by the specified amount.                                                           |
+| $rename	    | Renames a field.                                                                                                     |
+| $setOnInsert  | Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that   |                 |  modify existing documents.                                                                                          | 
+| $set	        | Sets the value of a field in a document.                                                                             |
+| $unset	    | Removes the specified field from a document.                                                                         | 
+| $min	        | Only updates the field if the specified value is less than the existing field value.                                 |
+| $max	        | Only updates the field if the specified value is greater than the existing field value.                              |
+| $currentDate	| Sets the value of a field to current date, either as a Date or a Timestamp.                                          |
+
+## Removing Documents
     
+## Indexes
