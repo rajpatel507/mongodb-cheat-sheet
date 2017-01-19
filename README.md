@@ -119,5 +119,74 @@ All mongoDB commands in compact formate.
 | $currentDate	| Sets the value of a field to current date, either as a Date or a Timestamp.                                          |
 
 ## Removing Documents
+
+| Method                        | Description                                                                                          |
+|-------------------------------|------------------------------------------------------------------------------------------------------|
+| db.collection.remove()	    | Delete a single document or all documents that match a specified filter.                             |
+| db.collection.deleteOne()     | Delete at most a single document that match a specified filter even though multiple documents may    | |                               | match the specified filter.                                                                          |
+| db.collection.deleteMany()    | Delete all documents that match a specified filter.                                                  |
+
     
 ## Indexes
+
+1. `db.collection.createIndex( <key and index type specification>, <options> )`  -  creates an index if an index of the same specification does not already exist.
+
+    Example:
+        NOTE:  1 - Ascending Index
+              -1 - Descending Index
+    
+    1. Create an Ascending Index
+    
+            `db.collection.createIndex(
+                { dateOfBirth : 1 }, function(err, result) {
+              });`
+              
+    2. Create a Descending Index 
+    
+            `db.collection.createIndex(
+                { dateOfBirth : -1 }, function(err, result) {
+              });`
+         
+    3. Create a Compound Index 
+    
+            `db.collection.createIndex(
+                { lastName : -1, dateOfBirth : 1 }, function(err, result) {
+              });`
+              
+    4. Create a Text Index
+    
+            `db.collection.createIndex(
+                { comments : "text" }, function(err, result) {
+              });`
+              
+    5. Create a Hashed Index
+    
+            `db.collection.createIndex(
+                { timestamp : "hashed" }, function(err, result) {
+              });`
+        
+    6. Create a Unique Index
+    
+            `collection.createIndex(
+                { lastName : -1, dateOfBirth : 1 },
+                { unique:true },
+                function(err, result) {
+              });`
+              
+    7. Create a Partial Index
+    
+            `collection.createIndex(
+                { lastName : 1, firstName: 1 },
+                { partialFilterExpression: { points: { $gt: 5 } } },
+                function(err, result) {
+              });`
+        
+              
+2. `db.collection.dropIndex()` - Remove an index
+
+3. `db.collection.dropIndexes()` - Remove All Indexes
+
+4. `db.accounts.reIndex()` - Rebuild all indexes on a collection in a single operation. This operation drops all indexes, including the     _id index, and then rebuilds all indexes.
+
+5. `db.collection.getIndexes()` - To return a list of all indexes on a collection
+ 
